@@ -1,8 +1,8 @@
 package com.practice.kafka.kafka;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -12,19 +12,19 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-@Slf4j
+//@Slf4j
 public class KafkaProducer {
 
-    private static final Logger log = LogManager.getLogger(KafkaProducer.class);
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private static final Logger log = LoggerFactory.getLogger(KafkaProducer.class);
 
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     public KafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
     public void sendMessage(String message) {
-        log.info("Message Send ::   {} ", message);
+        log.info("Message Send into KafkaProducer service ::   {} ", message);
         kafkaTemplate.send("my1Topic", message);
     }
 
